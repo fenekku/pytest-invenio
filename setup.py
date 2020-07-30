@@ -3,8 +3,7 @@
 # This file is part of pytest-invenio.
 # Copyright (C) 2017-2018 CERN.
 # Copyright (C) 2018 Esteban J. G. Garbancho.
-# Copyright (C) 2018 Northwestern University, Feinberg School of Medicine,
-# Galter Health Sciences Library.
+# Copyright (C) 2018-2020 Northwestern University
 #
 # pytest-invenio is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
@@ -53,7 +52,7 @@ install_requires = [
     'coverage>=4.0,<5.0.0',
     'isort>=4.3',
     'pydocstyle>=2.0.0',
-    'pytest>=4.6.1',
+    'pytest>=4.6.1,<6.0.0',
     'pytest-cov>=2.5.1',
     'pytest-flask>=0.15.1,<1.0.0',
     'pytest-pep8>=1.0.6',
