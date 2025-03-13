@@ -636,3 +636,41 @@ def test_entrypoint_importlib(testdir):
     """
     )
     testdir.runpytest("-s").assert_outcomes(passed=2)
+
+
+def test_set_tmp_config(conftest_testdir):
+    """Test temporary config settings."""
+    conftest_testdir.makepyfile(
+        """
+        import pytest
+
+        @pytest.fixture(scope='module')
+        def app_config(app_config):
+            app_config.update({
+                'MYSTUFF': "foo"
+            })
+            return app_config
+
+
+        def test_set_tmp_config_one(base_app, set_tmp_config):
+            # no interference from other test
+            assert "foo" == base_app.config["MYSTUFF"]
+            assert "MYSTUFF2" not in base_app.config
+
+            set_tmp_config({"MYSTUFF": "bar"})
+
+            assert "bar" == base_app.config["MYSTUFF"]
+
+
+        def test_set_tmp_config_two(base_app, set_tmp_config):
+            # no interference from other test
+            assert "foo" == base_app.config["MYSTUFF"]
+            assert "MYSTUFF2" not in base_app.config
+
+            set_tmp_config({"MYSTUFF": "baz", "MYSTUFF2": "foo"})
+
+            assert "baz" == base_app.config["MYSTUFF"]
+            assert "foo" == base_app.config["MYSTUFF2"]
+    """
+    )
+    conftest_testdir.runpytest().assert_outcomes(passed=2)

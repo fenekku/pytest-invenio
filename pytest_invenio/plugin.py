@@ -54,6 +54,7 @@ from .fixtures import (  # noqa
     search,
     search_clear,
     search_hosts,
+    set_tmp_config,
 )
 
 
